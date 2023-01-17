@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Compile Contract: 
+\f1\b0 \
+Eosio-cpp [name].cpp -o [name].wasm \'97antigen\
+eosio-cpp rewards.cpp -o realottester.wasm --abigen\
+\
+
+\f0\b Pushing Contract to Blockchain 
+\f1\b0 \
+Cleos -u [p2p url] set contract [account name]  [path to contract] [name].wasm \'97Abi [name].abi -p [accountname]\
+\
+cleos -u https://jungle4.cryptolions.io:443 set contract realotuser11  /Users/jp/tutorial_antelope/rewards_contract realottester.wasm --abi realottester.abi -p realotuser11\
+\
+
+\f0\b Unlock Wallet 
+\f1\b0 \
+Cleos wallet unlock -n [wallet-name]\
+cleos wallet unlock -n wallet-name\
+\
+
+\f0\b Set Permission Account to Eosin.code 
+\f1\b0 \
+cleos  -u https://jungle4.cryptolions.io:443 set account permission realotuser11  active --add-code\
+\
+
+\f0\b Send Token from one account to another \
+
+\f1\b0 cleos -u https://jungle4.cryptolions.io:443 transfer realottester realotuser11 "1.0002 EOS"  -p realottester@active\
+\
+Clear \
+\'b1 cleos -u https://jungle4.cryptolions.io:443 set contract realotuser11 --clear\
+\
+\
+}

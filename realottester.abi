@@ -1,0 +1,467 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.2",
+    "types": [],
+    "structs": [
+        {
+            "name": "Reward",
+            "base": "",
+            "fields": [
+                {
+                    "name": "reward_owner_account",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_owner_account_type",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_created_date",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_modified_date",
+                    "type": "string"
+                },
+                {
+                    "name": "payout_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "addassets",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                },
+                {
+                    "name": "profit_target",
+                    "type": "float64"
+                },
+                {
+                    "name": "current_reward",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "asset_owner",
+                    "type": "string"
+                },
+                {
+                    "name": "account_asset_owner_type",
+                    "type": "string"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "name"
+                },
+                {
+                    "name": "asset_description",
+                    "type": "string"
+                },
+                {
+                    "name": "ipfs_link",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "addnewreward",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint8"
+                },
+                {
+                    "name": "reward_owner_account",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_owner_account_type",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_created_date",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_modified_date",
+                    "type": "string"
+                },
+                {
+                    "name": "payout_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "adduserrecd",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "assets_s",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "revenue_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "platform_costs_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "profit_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "profit_target",
+                    "type": "float64"
+                },
+                {
+                    "name": "current_reward",
+                    "type": "float64"
+                },
+                {
+                    "name": "asset_owner",
+                    "type": "string"
+                },
+                {
+                    "name": "account_asset_owner_type",
+                    "type": "string"
+                },
+                {
+                    "name": "asset_description",
+                    "type": "string"
+                },
+                {
+                    "name": "ipfs_link",
+                    "type": "string"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "name"
+                },
+                {
+                    "name": "rewardtest",
+                    "type": "Reward[]"
+                }
+            ]
+        },
+        {
+            "name": "balances",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "uint64"
+                },
+                {
+                    "name": "balance",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "balancesss",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "uint64"
+                },
+                {
+                    "name": "username",
+                    "type": "name"
+                },
+                {
+                    "name": "balance",
+                    "type": "asset"
+                },
+                {
+                    "name": "total_records",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "countrecordm",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "deleteasset",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "name": "deleteassets",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "deletereward",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint8"
+                },
+                {
+                    "name": "reward_id",
+                    "type": "uint8"
+                }
+            ]
+        },
+        {
+            "name": "messages",
+            "base": "",
+            "fields": [
+                {
+                    "name": "ID",
+                    "type": "uint64"
+                },
+                {
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "modifyreward",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint8"
+                },
+                {
+                    "name": "reward_id",
+                    "type": "uint8"
+                },
+                {
+                    "name": "reward_owner_account",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_owner_account_type",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_created_date",
+                    "type": "string"
+                },
+                {
+                    "name": "reward_modified_date",
+                    "type": "string"
+                },
+                {
+                    "name": "payout_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "updateasset",
+            "base": "",
+            "fields": [
+                {
+                    "name": "asset_id",
+                    "type": "uint8"
+                },
+                {
+                    "name": "revenue_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "platform_costs_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                },
+                {
+                    "name": "profit_target",
+                    "type": "float64"
+                },
+                {
+                    "name": "profit_to_date",
+                    "type": "float64"
+                },
+                {
+                    "name": "current_reward",
+                    "type": "float64"
+                },
+                {
+                    "name": "reward_percentage",
+                    "type": "float64"
+                },
+                {
+                    "name": "asset_owner",
+                    "type": "string"
+                },
+                {
+                    "name": "account_asset_owner_type",
+                    "type": "string"
+                },
+                {
+                    "name": "ram_payer",
+                    "type": "name"
+                },
+                {
+                    "name": "asset_description",
+                    "type": "string"
+                },
+                {
+                    "name": "ipfs_link",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "addassets",
+            "type": "addassets",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "addnewreward",
+            "type": "addnewreward",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "adduserrecd",
+            "type": "adduserrecd",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "countrecordm",
+            "type": "countrecordm",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "deleteasset",
+            "type": "deleteasset",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "deleteassets",
+            "type": "deleteassets",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "deletereward",
+            "type": "deletereward",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "modifyreward",
+            "type": "modifyreward",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "updateasset",
+            "type": "updateasset",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "assetsnew",
+            "type": "assets_s",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "balances",
+            "type": "balances",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "balancesss",
+            "type": "balancesss",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "messages",
+            "type": "messages",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "kv_tables": {},
+    "ricardian_clauses": [],
+    "variants": [],
+    "action_results": []
+}

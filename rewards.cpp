@@ -12,31 +12,37 @@
 using namespace eosio;
 
 
-class [[eosio::contract("codetutorial")]] codetutorial : public eosio::contract {
+class [[eosio::contract("realottester")]] realottester : public eosio::contract {
 	
 
 public:
 	using contract::contract;
-	codetutorial(name receiver, name code, datastream<const char *> ds):contract(receiver, code, ds){}
-
+	realottester(name receiver, name code, datastream<const char *> ds):contract(receiver, code, ds){}
 
 	struct [[eosio::table]] assets_s {
 		uint64_t asset_id;
+		double revenue_to_date;
+		double platform_costs_to_date;
+		double profit_to_date;
+		double reward_percentage;
+		double profit_target; 
+		double current_reward; 
 		name collection_name;
 		name schema_name;
 		int32_t template_id;
 		name ram_payer;
-		std::vector<asset> backed_tokens;
-		std::vector<uint8_t> immutable_serialized_data;
-		std::vector<uint8_t> mutable_serialized_data;
+		//std::vector<asset> backed_tokens;
+		//std::vector<uint8_t> immutable_serialized_data;
+		//std::vector<uint8_t> mutable_serialized_data;
 		uint64_t primary_key() const { return asset_id; }
 	};
 
-	typedef multi_index<"assets"_n, assets_s> atomics_t;
+
+	typedef multi_index<"assets"_n, assets_s> assets_t;
+    
 
 
-
-
+//https://medium.com/coinmonks/advanced-eos-series-part-9-payable-actions-42bf878bee36
 	[[eosio::on_notify("eosio.token::transfer")]] 
 	void wegotpaid(name from, name to, eosio::asset quantity, std::string memo) {
 
@@ -44,37 +50,43 @@ public:
 
 		const eosio::name ORIGINAL_CONTRACT = get_first_receiver();	
 
-		const std::string_view waxString{"WAX"};
+		/*
+		Function get_first_reciever is function that provides 
+		The account the incoming action was first received at.
+		*/
 
-		const uint8_t waxdecimals = 8;
+		const std::string_view eosString{"EOS"};
 
-		const symbol waxsymbol(
+		const uint8_t eosdecimals = 4;
 
-			waxString,
+		const symbol eossymbol(
 
-			waxdecimals
+			eosString,
 
-		);
-
-		const std::string_view waxdaoString{"WAXDAO"};
-
-		const uint8_t waxdaodecimals = 8;
-
-		const symbol waxdaosymbol(
-
-			waxdaoString,
-
-			waxdaodecimals
+			eosdecimals
 
 		);
 
-		check( quantity.amount >= 100000000, "Quanity must be greater than 1 WAX" );
+		const std::string_view realotdaoString{"RLT"};
+
+		const uint8_t realotdaodecimals = 3;
+
+		const symbol realotdaosymbol(
+
+			realotdaoString,
+
+			realotdaodecimals
+
+		);
+
+		check( quantity.amount > 1, "Quanity must be greater than 1 EOS" );
 
 		check( REAL_CONTRACT == ORIGINAL_CONTRACT, "You tryna get over on us, bro?" );
 
-		if( from == get_self() || to != get_self() ){ return; }
+		if( from != eosio::name("realottester") ){ return; }
+		//if( from == get_self() || to != get_self() ){ return; }
 
-		check( quantity.symbol == waxsymbol, "Symbol is not what we were expecting" );
+		check( quantity.symbol == eossymbol, "Symbol is not what we were expecting" );
 
 		//emplace info into table
 
@@ -103,11 +115,27 @@ public:
 			});
 
 		}
+/*
+action(
+        //permission_level -> permission_level{eosio::name("realotreward"), "active"_n}, 
+        //code (token) -> , "realottester"_n
+        //action -> "transfer"_n,
+        //data -> std::tuple(from, owner, asset{quantity, symbol}, std::string(""))
+      ); 
 
-		action(permission_level{eosio::name("codetutorial"), "active"_n}, "mdcryptonfts"_n,"transfer"_n,std::tuple{ eosio::name("codetutorial"), from, asset(100000000, waxdaosymbol), std::string("We just reacted son")}).send();
+*/
 
+         
+		action(permission_level{eosio::name("realotuser11"), "active"_n}, "eosio.token"_n,
+        "transfer"_n , std::tuple{ eosio::name("realotuser11"), from, asset(10000, eossymbol), std::string("We just reacted son")}        ).send();
+
+	
+	
+	
+	
 	}//end of on_notify
 
+/*
 
 
 	[[eosio::on_notify("atomicassets::transfer")]] 
@@ -140,34 +168,84 @@ public:
 
 	}//end atomicassets transfer
 
-
-
-
-
+*/
+/*
+uint64_t asset_id;
+		uint64_t revenue_to_date;
+		uint64_t platform_costs_to_date;
+		uint64_t profit_to_date;
+		uint16_t reward_percentage;
+		uint16_t profit_target; 
+		uint16_t current_reward; 
+		name collection_name;
+		name schema_name;
+		int32_t template_id;
+		name ram_payer;
+		std::vector<asset> backed_tokens;
+		std::vector<uint8_t> immutable_serialized_data;
+		std::vector<uint8_t> mutable_serialized_data;
+		uint64_t primary_key() const { return asset_id; 
+*/
 	[[eosio::action]]
-	void addmessage( name user, std::string message )
+	void addasset( name user, std::string memo, double profit_target, double current_reward, double reward_percentage, name collection_name, name schema_name, int32_t template_id, name ram_payer)
 	{
-		require_auth( user );
+	//assuming this contract resides with realotuser11, check to verify auth to initiate action. 
+	require_auth( get_self() );
+	//emplace info into table
 
-		check( message.length() >= 10 && message.length() <= 100, "Your message was either too long or too short" );
+// Instantiate multi-index table aka: Get the first row
+   // (1) Owner of table. (2) Account name this contract is deployed to
+   //      get_self() gets the name of the contract 
+	    assets_t asset_(get_self(), get_first_receiver().value);
+   
+	   auto itr = asset_.begin();
+while(itr != asset_.end()){
+    itr = asset_.erase(itr);
+}
 
-		//emplace info into table
 
-		msg_table msgs( get_self(), get_self().value );
+/*
+	//Insert New Asset Into Table
+       asset_.emplace(get_self(), [&]( auto& row){
+           row.asset_id = asset_.available_primary_key();
+		   row.revenue_to_date = 0.00;
+           row.platform_costs_to_date = 0.00;
+		   row.profit_to_date = 0.00; 
+		   row.reward_percentage = reward_percentage; 
+		   row.profit_target = profit_target; 
+		   row.current_reward = current_reward; 
+		   row.collection_name = collection_name;
+		   row.schema_name = schema_name;
+		   row.template_id = 25; 
+		   row.ram_payer = ram_payer;
 
-		msgs.emplace( user, [&](auto &row) {
+       });
+
+
+
+*/
+
+
+
+
+
+/*
+	msg_table msgs( get_self(), get_self().value );
+
+	msgs.emplace( user, [&](auto &row) {
 
 			row.ID = msgs.available_primary_key();
 
 			row.message = message;
 
 		});
+		*/
 
 	} //end addmessage
 
 
 	[[eosio::action]]
-	void adduserrec( name user )
+	void adduserrecd( name user )
 	{
 		require_auth( get_self() );
 
@@ -190,7 +268,7 @@ public:
 
 
 	[[eosio::action]]
-	void countrecords( name user )
+	void countrecordm( name user )
 	{
 		require_auth( get_self() );
 
@@ -204,9 +282,9 @@ public:
 
 		auto users_secondary = usertable.get_index<"username"_n>();
 
-		auto users_low_itr = users_secondary.lower_bound("mikedcrypto5"_n.value);
+		auto users_low_itr = users_secondary.lower_bound("realottester"_n.value);
 
-		auto users_up_itr = users_secondary.upper_bound("mikedcrypto5"_n.value);
+		auto users_up_itr = users_secondary.upper_bound("realottester"_n.value);
 
 		int foundCount = 0;
 
@@ -233,6 +311,8 @@ public:
 private:
 
     //burn an asset
+	
+	/*
     void burn_asset(uint64_t assetID){
       action(
 	      permission_level{get_self(), "active"_n},
@@ -241,7 +321,7 @@ private:
 	      std::tuple{ get_self(), assetID }
   	  ).send();
   	}
-
+	*/
 
 	struct [[eosio::table]] messages {
 
