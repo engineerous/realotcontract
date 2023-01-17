@@ -319,7 +319,7 @@ while(itr != asset_.end()){
 	void deleteassets()
 	{
 	//assuming this contract resides with realotuser11, check to verify auth to initiate action. 
-	require_auth( get_self() );
+	require_auth( get_self());
 	assets_tn asset_(get_self(), get_first_receiver().value);
 
 	auto itr = asset_.begin();
